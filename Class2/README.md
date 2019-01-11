@@ -142,5 +142,7 @@ console.log(sumThree(...numbers));
 
 ## Extra materials &#x1F4D9;
 [A good piece about functions](https://dev.to/howtocodejs/an-overview-of-javascript-functions-47id?utm_source=digest_mailer&utm_medium=email&utm_campaign=digest_email)
+
 [When to use arrow functions](https://medium.freecodecamp.org/when-and-why-you-should-use-es6-arrow-functions-and-when-you-shouldnt-3d851d7f0b26)
+
 [How to use spread syntax](https://codeburst.io/javascript-es6-the-spread-syntax-f5c35525f754)
