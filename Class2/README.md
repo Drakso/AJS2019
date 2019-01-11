@@ -1,4 +1,4 @@
-# Functions pt1
+# Functions pt1 &#x1F34E;
 ## What are functions
 Functions are named blocks of code that we can store in memory for later use. We always try and use functions and wrap pieces of logic in functions as much as we can. This is a good practice because functions make our code:
 * More organized
@@ -46,7 +46,7 @@ function printPersonDetails(firstName, lastName, age, address){
     return `The person ${getFullName(firstName, lastName)} age ${age} lives on ${address}!`;
 }
 ```
-##### `How not to call function inside a function`
+##### `How not to call function inside a function` &#x1F534;
 ``` javascript
 // This will not work because you are declaring a function inside this function, not calling it.
 function printPersonDetails(firstName, lastName, age, address){
@@ -139,3 +139,5 @@ function sumThree(num1,num2,num3){
 // We can call the function with the array values separately with spread syntax
 console.log(sumThree(...numbers));
 ```
+
+## Extra materials &#x1F4D9;
