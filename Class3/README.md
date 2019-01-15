@@ -95,7 +95,7 @@ getFullName("Cave", "Johnson"); // Will log Cave Johnson in the console
 console.log(result); // Will throw an Uncaught Reference Error
 // It throws this error because it can't find a variable named result
 ```
-![Scopes Example](https://github.com/sedc-codecademy/sedc7-04-ajs/blob/master/g2/Class3/Img/scopeImage2.PNG)
+![Scopes Example](https://github.com/Drakso/AJS2019/blob/master/Class3/Img/scopeImage2.PNG?raw=true)
 ### Block scope
 A block scope is a new barrier introduced in ES6. It is another type of scope that coexists with the function scope. So if the function scope created a barrier between the function and the outside world, the block scope creates a barrier between a block of code and the outside world. A block of code is code that is enclosed in **{ }**.  When we declare a variable with the keyword **let** inside any block of **{ }** that variable is bound only to that block. Nobody can call it from outside of that block. To the outside, this variable does not exist.
 ```javascript
@@ -147,7 +147,7 @@ function sumPlusOne(num1, num2){
 }
 sumPlusOne(ten,7);
 ```
-![Scopes Example Colored](https://github.com/sedc-codecademy/sedc7-04-ajs/blob/master/g2/Class3/Img/scopeImage1.PNG)
+![Scopes Example Colored](https://github.com/Drakso/AJS2019/blob/master/Class3/Img/scopeImage1.PNG?raw=true)
 ## Self invoked functions
 Self invoked functions are functions that are not just written on the spot but also called and executed at the same time. Basically what we usually do to create a function like this, is we create an anonymous function at some point in our code and if we want to call it and execute it immediately we put brackets around it and brackets after it just like calling a function. This makes our anonymous functions handy not only when we want to declare at the spot but call it on the spot as well. 
 **Note:** We can name self invoked functions but there is no point in doing so most of the time. 
