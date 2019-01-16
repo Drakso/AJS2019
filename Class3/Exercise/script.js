@@ -23,16 +23,16 @@ $(document).ready(()=>{
   }
   function createRow(country){
     let currencies = (curr =>{
-      let result = "|";
+      let result = "";
       for (let currency of curr) {
-        result += ` ${currency.name}(${currency.symbol}) |`;
+        result += ` ${currency.name}(${currency.symbol})`;
       }
       return result;
     })(country.currencies);
     let languages = (lang =>{
-      let result = "|";
+      let result = "";
       for (let language of lang) {
-        result += ` ${language.name}(${language.nativeName}) |`;
+        result += ` ${language.name}(${language.nativeName})`;
       }
       return result;
     })(country.languages);
@@ -62,7 +62,11 @@ $(document).ready(()=>{
         },
         error: function(error){
             console.log(error);
-            message.innerHTML = error.responseJSON.message;
+            if(error.status === 404){
+              message.innerHTML = "No countries were found!";
+            } else {
+              message.innerHTML = "There were some problems. Please try again.";
+            }
             resultField.getElementsByTagName("tbody")[0].innerHTML = "";
             resultField.getElementsByTagName("table")[0].style.display = "none";
         }
