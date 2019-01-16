@@ -149,7 +149,7 @@ sumPlusOne(ten,7);
 ```
 ![Scopes Example Colored](https://github.com/Drakso/AJS2019/blob/master/Class3/Img/scopeImage1.PNG?raw=true)
 ## Self invoked functions
-Self invoked functions are functions that are not just written on the spot but also called and executed at the same time. Basically what we usually do to create a function like this, is we create an anonymous function at some point in our code and if we want to call it and execute it immediately we put brackets around it and brackets after it just like calling a function. This makes our anonymous functions handy not only when we want to declare at the spot but call it on the spot as well. 
+Self invoked functions or immediately-invoked function expressions (IIFE), are functions that are not just written on the spot but also called and executed at the same time. Basically what we usually do to create a function like this, is we create an anonymous function at some point in our code and if we want to call it and execute it immediately we put brackets around it and brackets after it just like calling a function. This makes our anonymous functions handy not only when we want to declare at the spot but call it on the spot as well. These functions help us organise and use variables in enclosed spaces where they will not affect or polute the rest of our code. We can write code in our self invoked functions that will run at the moment and we will be sure that it will be contained in that function at that moment only. 
 **Note:** We can name self invoked functions but there is no point in doing so most of the time. 
 ```javascript
 // Anonymous functions
