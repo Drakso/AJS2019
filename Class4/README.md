@@ -75,6 +75,24 @@ function sumTo(num) {
 let sumTo = num => num === 0 ? 0 : num + sumTo(--num)
 ```
 
+## What is strict typing in JavaScript?
+Javascript lets us do all sorts of magic things. But some might say it is too flexible of a language. For this reason, for securing our code from our selves and our mistakes as developers, something that is called **strict** typing exists. We tell at the start of our script or at the start of a function **'use strict';**. With this some extra rules are applied on your javascript code. Some of those are:
+* Not allowing to pass value to an undeclared variable
+* Not allowing to delete variables, functions or objects
+* Not allowing declaring two parameters of a function with the same name
+* Some extra names are not allowed to be used as variables ( are reserved for the language it self )
+
+```javascript
+'use strict';
+// These lines of code will throw an error if we use strict
+number = 15; // no declaration
+delete number; // cant delete stuff
+function sum(num1, num1){ return num1 + num1 }; // same parameter names
+let eval = 5; // cant use keyword eval
+let arguments = 2; // cant use ketworkd arguments
+```
+
+
 ## Higher order functions
 Higher order functions are just functions that take other functions as arguments. With these functions we can make our code more readable and more organised. We can combine higher order functions to get results that would otherwise cost us 10+ lines of code, to be written and compacted in to only one or two. 
 
@@ -194,23 +212,6 @@ let allGradesExeptLowest = students
 .filter(student => student.averageGrade > 1)
 .map((student) => student.averageGrade)
 .reduce((sum, grade) => sum += grade, 0);
-```
-
-## What is strict typing in JavaScript?
-Javascript lets us do all sorts of magic things. But some might say it is too flexible of a language. For this reason, for securing our code from our selves and our mistakes as developers, something that is called **strict** typing exists. We tell at the start of our script or at the start of a function **'use strict';**. With this some extra rules are applied on your javascript code. Some of those are:
-* Not allowing to pass value to an undeclared variable
-* Not allowing to delete variables, functions or objects
-* Not allowing declaring two parameters of a function with the same name
-* Some extra names are not allowed to be used as variables ( are reserved for the language it self )
-
-```javascript
-'use strict';
-// These lines of code will throw an error if we use strict
-number = 15; // no declaration
-delete number; // cant delete stuff
-function sum(num1, num1){ return num1 + num1 }; // same parameter names
-let eval = 5; // cant use keyword eval
-let arguments = 2; // cant use ketworkd arguments
 ```
 
 ## Extra materials &#x1F4D9;
