@@ -66,6 +66,28 @@ let sumTo = num => num === 0 ? 0 : num + sumTo(--num)
 
 ## Higher order functions
 Higher order functions are just functions that take other functions as arguments. With these functions we can make our code more readable and more organised. We can combine higher order functions to get results that would otherwise cost us 10+ lines of code, to be written and compacted in to only one or two. 
+
+#### forEach
+forEach is a function that accepts a function as an argument and it runs it for every element in an array. This function does not return anything. It just runs a code for every element without any resul in return. 
+```javascript
+// Without higher order function
+for (let i = 0; i < students.length; i++) {
+    console.log(`${students[i].firstName} ${students[i].lastName}`);
+}
+  
+// With higher order function using a function
+function logFullNames(student){
+	console.log(`${student.firstName} ${student.lastName}`);
+}
+students.forEach(logFullNames);
+
+// With higher order function using annonimous function
+students.forEach(function(student){ console.log(`${student.firstName} ${student.lastName}`)});
+
+// With higher order function using arrow function
+students.forEach(student => console.log(`${student.firstName} ${student.lastName}`));
+```
+
 #### filter
 Filter is a higher order function that accepts a function as an argument. That function has an expression that tests every value from the collection and returns a new collection with values that are true for the expression or statement in the argument function. 
 ```javascript
