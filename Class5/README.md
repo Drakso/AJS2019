@@ -24,10 +24,15 @@ The data about the weather will be acquired from an external api. There should b
 #### About the API
 We will be using the [openWeatherMap](https://openweathermap.org/) API. This API is free but requires an account. When you make an account there would be an API keys tab that you can open. There you can find your API key. If there is no API key, you can generate it by clicking on the button on the right that says Generate. With this key you can make 60 calls a minute. Here are some usefull links:
 **API:**https://openweathermap.org/current
+
 **Weather for a City Link:** https://api.openweathermap.org/data/2.5/forecast?q=CITY-NAME-HERE&units=metric&APPID=API-KEY-HERE
+
 Ex: https://api.openweathermap.org/data/2.5/forecast?q=skopje&units=metric&APPID=64e59f6374abe0d9b758877616ae444b
+
 **Icon Link:** http://openweathermap.org/img/w/ICON-CODE-HERE.png
+
 Ex: http://openweathermap.org/img/w/10d.png
+
 ### Planning phase
 In this step we already analysed the stuff that we need and the requirements for the application. Now we have to plan it. Planning is one of the most important part of the development process. We take the whole problem of building the app and create smaller chunks or tasks that we can complete. 
 1.  Create HTML page and connect a script, css document and libraries
