@@ -1,0 +1,19 @@
+.navbar img{
+    height: 5vh;
+}
+
+#getBtn {
+    margin-top: 5vh;
+}
+
+.title {
+    font-size: 2.6em;
+}
+
+.stat {
+    font-size: 1.6em;
+}
+
+#hourly {
+    display:none;
+}
