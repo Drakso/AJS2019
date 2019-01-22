@@ -1,3 +1,4 @@
+// Global variables
 let navbar = document.querySelector(".navbar");
 let weatherIcon = document.getElementById("weatherIcon");
 let statsDiv = document.getElementById("stats");
@@ -5,11 +6,15 @@ let hourlyDiv = document.getElementById("hourly");
 let hourlyTable = document.getElementById("hourlyTable");
 let statsNav = document.getElementById("statsNav");
 let hourlyNav = document.getElementById("hourlyNav")
+let message = document.getElementById("message");
+
+// Functions
 function getWeather(cityName) {
   let xhr = new XMLHttpRequest();
   xhr.onload = function () {
     if (xhr.status >= 200 && xhr.status < 300) {
       console.log("We got the weather!");
+      message.innerText = "";
       let resultParsed = JSON.parse(xhr.response);
       console.log(resultParsed);
       generateHourlyTable(hourlyTable, resultParsed.list);
@@ -17,6 +22,9 @@ function getWeather(cityName) {
     } else {
       console.log("Problem getting the weather :(");
       console.log(JSON.parse(xhr.responseText).message);
+      statsDiv.innerHTML = "";
+      hourlyTable.innerHTML = "";
+      message.innerText = JSON.parse(xhr.responseText).message;
     }
   };
   xhr.open("GET", `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&APPID=74e59f6374abe0d9b758877616ae444c`);
@@ -100,11 +108,11 @@ function generateHourlyTable(element, weatherList){
   element.innerHTML = `<li class="list-group-item">
   <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-2">Weather</div>
-    <div class="col-md-2">Time</div>
-    <div class="col-md-2">Temperature</div>
-    <div class="col-md-2">Humidity</div>
-    <div class="col-md-2">Wind Speed</div>
+    <div class="col-md-2"><b>Weather</b></div>
+    <div class="col-md-2"><b>Time</b></div>
+    <div class="col-md-2"><b>Temperature</b></div>
+    <div class="col-md-2"><b>Humidity</b></div>
+    <div class="col-md-2"><b>Wind Speed</b></div>
   </div>
 </li>`;
   weatherList.forEach(weather => {
@@ -126,6 +134,8 @@ function generateHourlyRow(weather){
 function getWeatherIcon(iconId){
   return `<img src="http://openweathermap.org/img/w/${iconId}.png">`;
 }
+
+// Event Handlers
 navbar.querySelector(".btn").addEventListener("click", ()=>{
   console.log("hey");
   let cityName = navbar.querySelector("input").value;

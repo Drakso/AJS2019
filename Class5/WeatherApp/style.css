@@ -16,4 +16,16 @@
 
 #hourly {
     display:none;
+    opacity: 0.9;
+}
+#message {
+    background-color: white;
+    opacity: 0.9;  
+}
+#stats {
+    background-color: white;
+    opacity: 0.9;
+}
+body {
+    background-image: url(https://clipground.com/images/blue-skies-clipart-17.jpg);
 }
