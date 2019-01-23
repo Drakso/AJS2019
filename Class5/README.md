@@ -43,9 +43,10 @@ In this step we already analysed the stuff that we need and the requirements for
 6. Build the navigation links/buttons mechanic to change the view
 7. Create a function that gets all the needed statistics and returns them
 
-**Hint:** use higher order functions to get the required statistics
+  **Hint:** use higher order functions to get the required statistics
 
-**Hint:** use an object as a return value ( bundle the stats in to one package )
+  **Hint:** use an object as a return value ( bundle the stats in to one package )
+  
 8. Create a function for printing the stats in the weather stats view
 9. Create a function for printing the table for hourly stats
 ### Coding phase
