@@ -36,20 +36,20 @@
 // }
 // first(second);
 
-function makeCall(url, callback){
-    $.ajax({
-        url: url,
-        success: function (response) {
-          console.log('The request succeeded!');
-          callback(response);
-        }, 
-        error: function(response){
-          console.log('The request failed!');
-          return response.responseText;
-        }
-      });
-}
-function print(results){
-    console.log(results);
-}
-makeCall("https://swapi.co/api/people/1/", print);
+// function makeCall(url, callback){
+//     $.ajax({
+//         url: url,
+//         success: function (response) {
+//           console.log('The request succeeded!');
+//           callback(response);
+//         }, 
+//         error: function(response){
+//           console.log('The request failed!');
+//           return response.responseText;
+//         }
+//       });
+// }
+// function print(results){
+//     console.log(results);
+// }
+// makeCall("https://swapi.co/api/people/1/", print);
