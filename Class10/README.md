@@ -122,4 +122,5 @@ let newVehicle = new aCar.constructor(1, "plane", "fh4", 999999);
 
 ## Extra materials &#x1F4D9;
 [Prototypes explained](https://www.digitalocean.com/community/tutorials/understanding-prototypes-and-inheritance-in-javascript)
+
 [Inheritance in JavaScript](https://hackernoon.com/understanding-javascript-prototype-and-inheritance-d55a9a23bde2)
