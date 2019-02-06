@@ -63,3 +63,16 @@ class Person {
     }
 }
 //
+
+
+// Get and Set 
+
+class Person {
+    constructor(name, birthYear) {
+        this.name = name
+        this.yearOfBirth = birthYear
+    }
+    get age() {
+        return new Date().getFullYear() - this.yearOfBirth // Use: me.age ---> 30 -> me.age = 20 -> me.age ---> 30 //we simulate private property that cant be changed
+    }
+}
