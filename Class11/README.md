@@ -86,5 +86,30 @@ class Car extends WheeledVehicle {
 ## Get / Set
 Getters and Setters are not a new concept in programming. When we create properties on objects there are two things that can happen after we create the object: try and get a value from a property or try to set a value to a property. There are functions that handle the getting and setting of these properties behind the scenes and we can use them in classes if we need to change the way we get or set a property. This is useful when we want to validate something on setting or log something on setting or getting. We can also structure the data that comes from our getter or setter.
 ```javascript
+class ElectricCar extends Car {
+    constructor(id, name, batch, price, doors, owner) {
+        super(id, name, batch, price, doors, true);
+		this.owner = owner;
+    }
+    get Owner() {
+		console.log("We are getting the name of the owner. Please wait...");
+        return this._owner;
+    }
+	set Owner(ownerName){
+		console.log("We are setting the name of the owner. Please wait...")
+		ownerName > 1 ? _owner = ownerName : (()=> throw new Error("Owner name too short!"))();
+	}
+}
+
+let myElectricCar(12, "Tesla", "23n", 30000, 5, "Dejan");
+console.log(myElectricCar);
+console.log(myElectricCar.owner);
+let myOtherElectricCar(13, "Electra", "51q", 25000, 3, "I");
 ```
 
+## Extra materials &#x1F4D9;
+[Class syntax explained](https://javascript.info/class)
+
+[From prototypes to Classes](https://www.digitalocean.com/community/tutorials/understanding-classes-in-javascript)
+
+[JavaScript classes under the hood](https://medium.com/tech-tajawal/javascript-classes-under-the-hood-6b26d2667677)
