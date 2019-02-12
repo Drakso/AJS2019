@@ -30,7 +30,7 @@ class WheeledVehicle extends Vehicle {
 		console.log(`We are driving a ${this.name} on ${this.wheels} wheels!`);
     }
 }
-let bike = new WheeledVehicle(87, "Bike", "12g", 700);
+let bike = new WheeledVehicle(87, "Bike", "12g", 700, 2);
 console.log(bike);
 bike.printVehicle();
 bike.driveVehicle();
@@ -47,11 +47,11 @@ class Car extends WheeledVehicle {
         if(ac) this.price += 400;
     }
     buyCar(money) {
-	    money >= this.price ? console.log("Congrats! You bought a car")! : 
+	    money >= this.price ? console.log("Congrats! You bought a car") : 
 		console.log(`You need ${this.price - money} more to buy this car!`);
     }
 }
-let car = new Car(99, "Car", "22k", 7800, 4);
+let car = new Car(99, "Car", "22k", 7800, 4, false);
 console.log(car);
 car.printVehicle();
 car.driveVehicle();
@@ -69,11 +69,11 @@ class Car extends WheeledVehicle {
         if(ac) this.price += 400;
     }
     buyCar(money) {
-	    money >= this.price ? console.log("Congrats! You bought a car")! : 
+	    money >= this.price ? console.log("Congrats! You bought a car") : 
 		console.log(`You need ${this.price - money} more to buy this car!`);
     }
     static addAc(car){
-		if(car.airConditioning){
+		if(!car.airConditioning){
 			car.airConditioning = true;
 			car.price += 400;
 			console.log(`The car has AC now and it costs ${car.price}`);
@@ -91,20 +91,20 @@ class ElectricCar extends Car {
         super(id, name, batch, price, doors, true);
 		this.owner = owner;
     }
-    get Owner() {
+    get owner() {
 		console.log("We are getting the name of the owner. Please wait...");
-        return this._owner;
+        return "The car is owned by:" + this._owner;
     }
-	set Owner(ownerName){
+	set owner(ownerName){
 		console.log("We are setting the name of the owner. Please wait...")
-		ownerName > 1 ? _owner = ownerName : (()=> throw new Error("Owner name too short!"))();
+		ownerName.length > 1 ? this._owner = ownerName : (()=> {throw new Error("Owner name too short!")})();
 	}
 }
 
-let myElectricCar(12, "Tesla", "23n", 30000, 5, "Dejan");
+let myElectricCar = new ElectricCar(12, "Tesla", "23n", 30000, 5, "Dejan");
 console.log(myElectricCar);
 console.log(myElectricCar.owner);
-let myOtherElectricCar(13, "Electra", "51q", 25000, 3, "I");
+let myOtherElectricCar = new ElectricCar(13, "Electra", "51q", 25000, 3, "I");
 ```
 
 ## Extra materials &#x1F4D9;
