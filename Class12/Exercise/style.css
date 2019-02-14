@@ -9,3 +9,7 @@
 .nav li{
     cursor: pointer;
 }
+
+h1{
+    text-align:center;
+}
