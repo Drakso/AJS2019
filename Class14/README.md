@@ -1,8 +1,8 @@
-# Ultimate Space Explorer 3000
-## Requirements
+# Ultimate Space Explorer 3000 🎮
+## Requirements 
 We are tasked in building a space game. In the space game we have an option to choose 3 ships with different stats and go on adventures to planets that will be shown on a galaxy map. Our job is to explore all planets in the universe. But this task will not be easy because we need to manage our ship, fuel and crew to survive this journey. 
 
-### A ship
+### A ship 🚀
 A ship is chosen at the start of the game. That ship will be the vehicle that we travel the galaxy and try to explore every planet. A ship will consist of:
 * name - the ship name
 * crew - number of crew
@@ -28,7 +28,7 @@ A ship is chosen at the start of the game. That ship will be the vehicle that we
 	* The ship is added to the dockedShips array of the planet
 	* The ship isWorking is changed to false
 	* The dockedPlanet property of the ship is changed to the planet
-### A planet
+### A planet 🌎
 A planet is an entity that floats in to space. It is shown on the web page so that the player can click on it and travel to it. When a ship gets on a planet it can either repair, refuel or hire a crew member.
 * name - Planet name
 * size - Planet size
@@ -55,7 +55,7 @@ A planet is an entity that floats in to space. It is shown on the web page so th
 	* if the ship has not enough credits you can't add a crew member
 	* When the ship hires a new crew member it's crew is expanded by 1 and the price is subtracted from the ship credits
 
-### Resources
+### Resources 🎁
 #### Prices
 ```javascript
 price: {
