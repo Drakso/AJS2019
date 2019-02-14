@@ -7,7 +7,7 @@ class Ship{
         this.hullMax = hullStrength;
         this.hull = hullStrength;
         this.speed = speed;
-        this.credits = 1000;
+        this.credits = 500;
         this.img = img;
         this.isWorking = false;
         this.isDamaged = false;
@@ -15,18 +15,20 @@ class Ship{
         this.dockedPlanet = null;
     }
     start(destinationPlanet){
+        console.log(this.dockedPlanet)
         if(!destinationPlanet instanceof Planet) {
             console.log(`${destinationPlanet} is not a planet!`);
             return;
         }
         if(destinationPlanet === this.dockedPlanet){
-            console.log(`You are already on planet ${destinationPlanet}.`);
+            console.log(`You are already on planet ${destinationPlanet.name}.`);
             return;
         }
         if(this.crew >= 1 && this.fuel >= destinationPlanet.distance * 10 && !this.isDamaged && !this.isDestroyed){
             this.isWorking = true;
+            console.log(this);
             if(this.dockedPlanet instanceof Planet){
-                this.dockedPlanet.pop();
+                this.dockedPlanet.shipsDocked.pop();
             }
             console.log("Everything set and ready to go.");
         } else {
@@ -35,7 +37,7 @@ class Ship{
         }
         console.log(`Heading to ${destinationPlanet.name}`);
         setTimeout(()=>{
-            this.fuel -= destinationPlanet.distance * 10;
+            this.fuel -= destinationPlanet.distance * 15;
             this.dock(destinationPlanet);
         }, destinationPlanet.distance * 1000 / this.speed );
     }
@@ -44,13 +46,15 @@ class Ship{
         console.log(`CREW: ${this.crew}`);
         console.log(`FUEL: ${this.fuel}/${this.fuelMax}`);
         console.log(`HULL: ${this.hull}/${this.hullMax}`);
+        console.log(`CREDITS: ${this.credits}`);
+        console.log(this.dockedPlanet);
     }
     dock(planet){
         console.log(`Docking on planet ${planet.name}`);
         setTimeout(()=>{
             planet.shipsDocked.push(this);
             this.isWorking = false;
-            this.planetDocked = planet;
+            this.dockedPlanet = planet;
             console.log(`${this.name} docked on the ${planet.name} planet.`);
         }, 2000);
     }
@@ -77,10 +81,15 @@ class Planet{
             console.log(`You are not docked on this planet!`);
             return;
         }
-        let price = this.getMarketPrice(8);
+        if(ship.hull === ship.hullMax){
+            console.log(`Your ship is in great shape already!`);
+            return;
+        }
+        let price = this.getMarketPrice(game.price.repair);
         if(ship.credits >= price){
             ship.credits -= price;
             ship.hull = ship.hullMax;
+            ship.isDamaged = false;
             console.log("Hulls repaired!");
         } else {
             console.log(`You need ${price - ship.credits} more credits.`);
@@ -95,7 +104,13 @@ class Planet{
             console.log(`You are not docked on this planet!`);
             return;
         }
-        let price = this.getMarketPrice(3);
+        if(ship.fuel === ship.fuelMax){
+            console.log(`Your fueltank is already full!`);
+            return;
+        }
+        if(this.ship )
+        console.log(game.price.fuel);
+        let price = this.getMarketPrice(game.price.fuel);
         if(ship.credits >= price){
             ship.credits -= price;
             ship.fuel = ship.fuelMax;
@@ -113,7 +128,7 @@ class Planet{
             console.log(`You are not docked on this planet!`);
             return;
         }
-        let price = this.getMarketPrice(15);
+        let price = this.getMarketPrice(game.price.crew);
         if(ship.credits >= price){
             ship.credits -= price;
             ship.crew += 1;
@@ -136,6 +151,11 @@ class Event{
 }
 
 let game = {
+    price: {
+        fuel: 40,
+        repair: 50,
+        crew: 70
+    },
     ships: [
         new Ship("StarFighter", 3, 380, 500, 0.5, "img/StarFighter.png"),
         new Ship("Crushinator", 5, 540, 400, 0.2, "img/Crushinator.png"),
@@ -187,6 +207,9 @@ let game = {
         }
     }
 }
+async function startGame(){
+    await game.fillGameBoard();
+    console.log(game.price.fuel);
+}
 
-game.fillGameBoard();
-
+startGame();
