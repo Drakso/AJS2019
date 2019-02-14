@@ -15,7 +15,6 @@ class Ship{
         this.dockedPlanet = null;
     }
     start(destinationPlanet){
-        console.log(this.dockedPlanet)
         if(!destinationPlanet instanceof Planet) {
             console.log(`${destinationPlanet} is not a planet!`);
             return;
@@ -24,9 +23,8 @@ class Ship{
             console.log(`You are already on planet ${destinationPlanet.name}.`);
             return;
         }
-        if(this.crew >= 1 && this.fuel >= destinationPlanet.distance * 10 && !this.isDamaged && !this.isDestroyed){
+        if(this.crew >= 1 && this.fuel >= destinationPlanet.distance * 20 && !this.isDamaged && !this.isDestroyed){
             this.isWorking = true;
-            console.log(this);
             if(this.dockedPlanet instanceof Planet){
                 this.dockedPlanet.shipsDocked.pop();
             }
@@ -37,7 +35,7 @@ class Ship{
         }
         console.log(`Heading to ${destinationPlanet.name}`);
         setTimeout(()=>{
-            this.fuel -= destinationPlanet.distance * 15;
+            this.fuel -= destinationPlanet.distance * 20;
             this.dock(destinationPlanet);
         }, destinationPlanet.distance * 1000 / this.speed );
     }
@@ -47,7 +45,6 @@ class Ship{
         console.log(`FUEL: ${this.fuel}/${this.fuelMax}`);
         console.log(`HULL: ${this.hull}/${this.hullMax}`);
         console.log(`CREDITS: ${this.credits}`);
-        console.log(this.dockedPlanet);
     }
     dock(planet){
         console.log(`Docking on planet ${planet.name}`);
@@ -152,9 +149,9 @@ class Event{
 
 let game = {
     price: {
-        fuel: 40,
-        repair: 50,
-        crew: 70
+        fuel: 50,
+        repair: 60,
+        crew: 80
     },
     ships: [
         new Ship("StarFighter", 3, 380, 500, 0.5, "img/StarFighter.png"),
@@ -169,6 +166,19 @@ let game = {
         new Planet("B18-1", 250000, 4000000, 12, 2, "img/B18-1.png")
     ],
     selectedShip: null,
+    shipInfo: function(ship){
+        return  `
+        <div class="card" style="width: 18rem;">
+        <img src="img/${ship.name}.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${ship.name}</h5>
+          <p class="card-text">Crew: ${ship.crew}</p>
+          <p class="card-text">Hull Strength: ${ship.hull}</p>
+          <p class="card-text">Fuel Capacity: ${ship.fuel}</p>
+          <p class="card-text">Speed: ${ship.speed}</p>
+        </div>
+      </div>`
+    },
     gameCardInfo: function(planet){
         return `
         <div class="card" style="width: 18rem;">
@@ -190,8 +200,20 @@ let game = {
         </div>
       </div>`
     },
+    chooseShip: function(){
+        let shipSelectDiv = document.getElementById("chooseShip");
+        for(let ship of game.ships){
+            let shipCard = document.getElementById(ship.name);
+            shipCard.innerHTML = this.shipInfo(ship);
+            shipCard.addEventListener("click", function(e){
+                game.selectedShip = ship;
+                shipSelectDiv.style.display = "none";
+                document.getElementById("gameMap").style.display = "block"
+            })
+        }
+    },
     fillGameBoard: function(){
-        game.selectedShip = game.ships[parseInt(prompt("Select a ship: 1, 2, 3")) - 1];
+        this.chooseShip();
         for (let planet of game.planets) {
             let planetDiv = document.getElementById(planet.name);
             planetDiv.innerHTML = game.gameCardInfo(planet);
@@ -209,7 +231,6 @@ let game = {
 }
 async function startGame(){
     await game.fillGameBoard();
-    console.log(game.price.fuel);
 }
 
 startGame();
