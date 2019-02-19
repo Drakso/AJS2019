@@ -13,8 +13,9 @@ class Ship{
         this.isDamaged = false;
         this.isDestroyed = false;
         this.dockedPlanet = null;
+        this.visited = false;
     }
-    start(destinationPlanet){
+    async start(destinationPlanet){
         if(!destinationPlanet instanceof Planet) {
             console.log(`${destinationPlanet} is not a planet!`);
             return;
@@ -34,6 +35,11 @@ class Ship{
             return;
         }
         console.log(`Heading to ${destinationPlanet.name}`);
+        let events = SpaceEvent.generateEvents(destinationPlanet.distance * 1000 / this.speed, game.events);
+        console.log(events);
+        for (const event of events) {
+            await event.startEvent(this);
+        }
         setTimeout(()=>{
             this.fuel -= destinationPlanet.distance * 20;
             this.dock(destinationPlanet);
@@ -53,6 +59,7 @@ class Ship{
             this.isWorking = false;
             this.dockedPlanet = planet;
             console.log(`${this.name} docked on the ${planet.name} planet.`);
+            planet.visited = true;
         }, 2000);
     }
 }
@@ -78,7 +85,7 @@ class Planet{
             console.log(`You are not docked on this planet!`);
             return;
         }
-        if(ship.hull === ship.hullMax){
+        if(ship.hull >= ship.hullMax){
             console.log(`Your ship is in great shape already!`);
             return;
         }
@@ -101,7 +108,7 @@ class Planet{
             console.log(`You are not docked on this planet!`);
             return;
         }
-        if(ship.fuel === ship.fuelMax){
+        if(ship.fuel >= ship.fuelMax){
             console.log(`Your fueltank is already full!`);
             return;
         }
@@ -136,14 +143,60 @@ class Planet{
     }
 }
 
-class Event{
-    constructor(name, description, crew, fuel, hull, img){
+class SpaceEvent{
+    constructor(name, description, crewModifier, fuelModifier, hullModifier){
         this.name = name;
         this.description = description;
-        this.crew = crew;
-        this.fuel = fuel;
-        this.hull = hull;
-        this.img = img;
+        this.crew = crewModifier;
+        this.fuel = fuelModifier;
+        this.hull = hullModifier;
+    }
+    startEvent(ship){
+        return new Promise((resolve, reject)=>{
+          if(!ship instanceof Ship){
+            reject("The object is not a ship!");
+          }
+          let that = this;
+          setTimeout(()=>{
+            ship.crew += that.crew;
+            ship.fuel += that.fuel;
+            ship.hull += that.hull;
+            console.log(`--EVENT: ${that.name}--
+            ${that.description}`);
+            console.log(that.modifiedStats());
+            console.log(`-----------------------`)
+            resolve();
+        }, 4000);
+        })     
+    }
+    modifiedStats(){
+        let result = "";
+        result += this.crew > 0 ? `${this.crew} boarded your ship and is part of your crew now.\n` : "";
+        result += this.crew < 0 ? `You lost ${Math.abs(this.crew)} of your crew.\n` : "";
+        result += this.fuel > 0 ? `You got ${this.fuel} extra fuel!\n` : "";
+        result += this.fuel < 0 ? `You lost ${Math.abs(this.fuel)} fuel!\n` : "";
+        result += this.hull < 0 ? `Your ship took ${Math.abs(this.hull)} damage!\n` : "";
+        result += this.hull > 0 ? `Your ship got ${this.hull} repair supplies!\n` : "";
+        return result;
+    }
+    static generateEvents(time, events){
+        let result = [];
+        let getRandomNum = (min, max) => {
+            return Math.round(Math.random() * (max - min) + min);
+        }
+        console.log(time);
+        let eventNum = 1;
+        if(time > 26000){
+            eventNum = 4;
+        } else if(time > 18000){
+            eventNum = 3;
+        } else if(time > 8000){
+            eventNum = 2;
+        }
+        for (let i = 0; i < eventNum; i++) {
+            result.push(events[getRandomNum(0, events.length-1)]);
+        }
+        return result;
     }
 }
 
@@ -165,7 +218,32 @@ let game = {
         new Planet("Dextriaey", 50000, 500000, 9, 3, "img/Dextriaey.png"),
         new Planet("B18-1", 250000, 4000000, 12, 2, "img/B18-1.png")
     ],
+    events: [
+        new SpaceEvent("Fuel Leak", "Due to low maintenance of the ship, the fuel tank leaked. The leak was patched, but we lost some fuel.", 0, -50, 0 ),
+        new SpaceEvent("Pirates!", "Space pirates attacked the ship! We escaped, but our hull took some damage!", 0, -20, -150 ),
+        new SpaceEvent("Unknown substance", "An unknown substance was found on the cargo ship. A crew member touched it and died on the spot.", -1, 0, 0 ),
+        new SpaceEvent("Asteroid field", "We entered an asteroid field. It was hard, but our captain managed to go out of it.", 0, -30, -100 ),
+        new SpaceEvent("Fire on deck", "The main system overheated and fire broke from one of the panels. The crew quickly extinguished it.", 0, 0, -70 ),
+        new SpaceEvent("Bad stop", "You stop at a nearby station for a pit-stop. They give you repair supplies.", 0, -50, +50 ),
+        new SpaceEvent("Captains Birthday", "It's the captain's birthday. Everybody got drunk. Nobody remembers what happened the last 12 hours.", -1, -60, -100 ),
+        new SpaceEvent("Space Shark", "Your ship is attacked by a space shark. After killing it, you watch a tutorial on how to turn shark blood in to fuel.", 0, +80, -120 ),
+        new SpaceEvent("Alien in need", "An alien is stranded on it's broken ship. It took some time and effort but you save him and board him on your ship.", 1, -50, -50 ),
+        new SpaceEvent("Hail the federation", "A federation cruiser hails you. They help you with supplies and fuel.", 0, +100, +100 ),
+        new SpaceEvent("Destroyed Transport Ship", "You encounter a destroyed transport ship. It's dangerous, but you try salvaging its fuel tank.", 0, +150, -80 ),
+        new SpaceEvent("Angry Spider", "An angry spider appears on the deck. The captain stomps on it. Everything is fine", 0, 0, 0 )
+    ],
     selectedShip: null,
+    isGameLost: function(ship){
+        if(ship.fuel <= 0 || ship.hull <= 0 || ship.crew <= 0){
+            console.log("YOU LOST!");
+        }
+    },
+    isGameWon: function(){
+        let result = planets
+        .map(x => x.visited)
+        .reduce((result, current) => result = result && current, true);
+        if(result) console.log("YOU WON!");
+    }, 
     shipInfo: function(ship){
         return  `
         <div class="card" style="width: 18rem;">

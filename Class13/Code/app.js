@@ -28,3 +28,4 @@ console.log("My script is loaded!");
 textService.addText("Hello SEDC!");
 textService.appendText("\n We are learning about node.js!");
 console.log(textService.readText());
+console.log($);

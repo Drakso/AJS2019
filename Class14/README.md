@@ -36,7 +36,7 @@ A planet is an entity that floats in to space. It is shown on the web page so th
 * distance - Planet distance
 * shipsDocked - Ships currently docked on the planet ( not settable, empty array by default )
 * development - The development level of the planet ( 1 - 3 )
-* getMarketPrice - method that accepts a price as an attribute of a service and returns the planet market value of that price by this formula : price = planet development * price / Math.Round( planet population / planet size )
+* getMarketPrice - method that accepts a price as an attribute of a service and returns the planet market value of that price by this formula : price = planet development * price - Math.floor( planet population / planet size )
 * repair - accepts a ship as an attribute and repairs it's hulls to max
 	* if the attribute is not a ship, you can't repair it
 	* if the ship is not docked on this planet, you can't repair it
@@ -58,27 +58,43 @@ A planet is an entity that floats in to space. It is shown on the web page so th
 ### Resources 🎁
 #### Prices
 ```javascript
-price: {
+let price = {
     fuel: 50,
     repair: 60,
     crew: 80
-}
+};
 ```
 #### Ships
 ```javascript
-ships: [
+let ships = [
     new Ship("StarFighter", 3, 380, 500, 0.5, "img/StarFighter.png"),
     new Ship("Crushinator", 5, 540, 400, 0.2, "img/Crushinator.png"),
     new Ship("Scouter", 1, 300, 300, 0.9, "img/Scouter.png")
-]
+];
 ```
 #### Planets
 ```javascript
-planets: [
+let planets = [
     new Planet("Rubicon9", 300000, 2000000, 4, 2, "img/Rubicon9.png"),
     new Planet("R7", 120000, 4000000, 7, 3, "img/R7.png"),
     new Planet("Magmus", 500000, 10000000, 6, 1, "img/Magmus.png"),
     new Planet("Dextriaey", 50000, 500000, 9, 3, "img/Dextriaey.png"),
     new Planet("B18-1", 250000, 4000000, 12, 2, "img/B18-1.png")
-],
+];
+```
+#### Events
+```javascript
+let events = [
+        new SpaceEvent("Fuel Leak", "Due to low maintenance of the ship, the fuel tank leaked. The leak was patched, but we lost some fuel.", 0, -50, 0 ),
+        new SpaceEvent("Pirates!", "Space pirates attacked the ship! We escaped, but our hull took some damage!", 0, -20, -150 ),
+        new SpaceEvent("Unknown substance", "An unknown substance was found on the cargo ship. A crew member touched it and died on the spot.", -1, 0, 0 ),
+        new SpaceEvent("Asteroid field", "We entered an asteroid field. It was hard, but our captain managed to go out of it.", 0, -30, -100 ),
+        new SpaceEvent("Fire on deck", "The main system overheated and fire broke from one of the panels. The crew quickly extinguished it.", 0, 0, -70 ),
+        new SpaceEvent("Bad stop", "You stop at a nearby station for a pit-stop. They give you repair supplies.", 0, -50, +50 ),
+        new SpaceEvent("Captains Birthday", "It's the captain's birthday. Everybody got drunk. Nobody remembers what happened the last 12 hours.", -1, -60, -100 ),
+        new SpaceEvent("Space Shark", "Your ship is attacked by a space shark. After killing it, you watch a tutorial on how to turn shark blood in to fuel.", 0, +80, -120 ),
+        new SpaceEvent("Alien in need", "An alien is stranded on it's broken ship. It took some time and effort but you save him and board him on your ship.", 1, -50, -50 ),
+        new SpaceEvent("Hail the federation", "A federation cruiser hails you. They help you with supplies and fuel.", 0, +100, +100 ),
+        new SpaceEvent("Destroyed Transport Ship", "You encounter a destroyed transport ship. It's dangerous, but you try salvaging its fuel tank.", 0, +150, -80 )
+    ];
 ```
