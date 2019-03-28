@@ -107,6 +107,13 @@ console.log(myElectricCar.owner);
 let myOtherElectricCar = new ElectricCar(13, "Electra", "51q", 25000, 3, "I");
 ```
 
+#### Check if an object is an instance of a class
+```javascript
+console.log(myElectricCar instanceof ElectricCar);
+console.log(myElectricCar instanceof Car);
+console.log(myElectricCar instanceof Vehicle);
+```
+
 ## Extra materials &#x1F4D9;
 [Class syntax explained](https://javascript.info/class)
 

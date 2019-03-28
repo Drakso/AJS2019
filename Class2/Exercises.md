@@ -11,6 +11,7 @@ Create a function that takes a number through a parameter and calls all three fu
 **Code:** getNumberStats(-25);
 **Console:** 2 Digits, Odd, Negative
 
+
 ## Exercise 2
 Create 2 variables with arrow functions.
 1. First arrow function will accept two parameters, one for element and one for color. The function should change the given element text color with the color given from the second color parameter. If no parameter is passed for color, the default value is **black**.

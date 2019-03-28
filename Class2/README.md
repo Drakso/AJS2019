@@ -1,5 +1,5 @@
 # Functions pt1 &#x1F34E;
-## What are functions
+## What are functions 
 Functions are named blocks of code that we can store in memory for later use. We always try and use functions and wrap pieces of logic in functions as much as we can. This is a good practice because functions make our code:
 * More organized
 * More readable
@@ -67,6 +67,7 @@ function sum(num1,num2){
 // 2 and 3 are arguments
 console.log(sum(2,3));
 ```
+
 ## Anonymous functions
 Anonymous functions or more precisely function expressions are functions that are not declared. They are written on the spot where we want them to be executed and when the code runs and gets to the line where they are written, they immediately execute the code that they hold and return a value at the same spot. We use these functions every time we need a function to be executed at some point in time once.
 
@@ -88,6 +89,15 @@ button.addEventListener("click", function(){
 ## Arrow Functions
 Arrow functions are somewhat new addition to the javascript language. They are a shorter version of the anonymous functions we discussed above. We can use them to simplify and shorten our code. Because they were added in the javascript standard in 2015 they may not be supported in very old browsers ( ex: internet explorer ). There are almost no differences in the two except that the one is shorter than the other. Arrow functions don't need **{ }** if they have only one expression or even a return. If you have more than one expression you will need { } and return. Parameters are put in **( )** only if there are more than one. One parameter don't need ( ).
 #### Arrow functions vs Normal anonymous functions
+#### no parameter, one expression
+```javascript
+// Anonymous function
+let logSomething = function(){
+    console.log("Hello there!");
+}
+// Arrow function
+let logSomething = () => console.log("Hello there!");
+```
 ##### one parameter, one expression
 ```javascript
 // Anonymous function
@@ -121,7 +131,7 @@ let sumFunc = (num1, num2) => {
     return result;
 };
 ```
-##### Anonymous function in an event listener
+##### Arrow function in an event listener
 ```javascript
 let button = document.getElementsByTagName("button")[0];
 button.addEventListener("click", ()=>{
